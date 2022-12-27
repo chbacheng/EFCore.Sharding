@@ -10,16 +10,20 @@ namespace EFCore.Sharding.PostgreSql
 {
     internal class ShardingPostgreSqlMigrationsSqlGenerator : NpgsqlMigrationsSqlGenerator
     {
-#pragma warning disable EF1001 // Internal EF Core API usage.
-        public ShardingPostgreSqlMigrationsSqlGenerator(MigrationsSqlGeneratorDependencies dependencies,  INpgsqlOptions npgsqlOptions) : base(dependencies, npgsqlOptions)
-#pragma warning restore EF1001 // Internal EF Core API usage.
+#pragma warning disable EF1001 // Internal EF Core API usage.  
+#if NET6_0_OR_GREATER
+        public ShardingPostgreSqlMigrationsSqlGenerator(MigrationsSqlGeneratorDependencies dependencies, INpgsqlSingletonOptions npgsqlSingletonOptions) : base(dependencies, npgsqlSingletonOptions)
         {
         }
+#elif NETSTANDARD2_1
+        public ShardingPostgreSqlMigrationsSqlGenerator(MigrationsSqlGeneratorDependencies dependencies, INpgsqlOptions npgsqlOptions) : base(dependencies, npgsqlOptions)
+        {
+        }
+#endif
+#pragma warning restore EF1001 // Internal EF Core API usage.
 
-        protected override void Generate(
-            MigrationOperation operation,
-            IModel model,
-            MigrationCommandListBuilder builder)
+
+        protected override void Generate(MigrationOperation operation, IModel model, MigrationCommandListBuilder builder)
         {
             var oldCmds = builder.GetCommandList().ToList();
             base.Generate(operation, model, builder);

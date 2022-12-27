@@ -175,7 +175,8 @@ namespace EFCore.Sharding.Tests
         /// <returns></returns>
         public static byte[] ToSHA1Bytes(this string str, Encoding encoding)
         {
-            SHA1 sha1 = new SHA1CryptoServiceProvider();
+            //SHA1 sha1 = new SHA1CryptoServiceProvider();
+            var sha1 = SHA1.Create();
             byte[] inputBytes = encoding.GetBytes(str);
             byte[] outputBytes = sha1.ComputeHash(inputBytes);
 
