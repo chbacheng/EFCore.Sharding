@@ -12,10 +12,7 @@ namespace EFCore.Sharding.SqlServer
         {
         }
 
-        protected override void Generate(
-            MigrationOperation operation,
-            IModel model,
-            MigrationCommandListBuilder builder)
+        protected override void Generate(MigrationOperation operation, IModel model, MigrationCommandListBuilder builder)
         {
             var oldCmds = builder.GetCommandList().ToList();
             base.Generate(operation, model, builder);

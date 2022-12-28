@@ -10,8 +10,7 @@ namespace EFCore.Sharding.MySql
 {
     internal class MySqlProvider : AbstractProvider
     {
-        public override DbProviderFactory DbProviderFactory
-            => MySqlConnectorFactory.Instance;
+        public override DbProviderFactory DbProviderFactory => MySqlConnectorFactory.Instance;
         public override ModelBuilder GetModelBuilder() => new ModelBuilder(MySqlConventionSetBuilder.Build());
 
         public override IDbAccessor GetDbAccessor(GenericDbContext baseDbContext) => new MySqlDbAccessor(baseDbContext);

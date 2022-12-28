@@ -15,10 +15,7 @@ namespace EFCore.Sharding.MySql
 #pragma warning restore EF1001 // Internal EF Core API usage.
         {
         }
-        protected override void Generate(
-            MigrationOperation operation,
-            IModel model,
-            MigrationCommandListBuilder builder)
+        protected override void Generate(MigrationOperation operation, IModel model, MigrationCommandListBuilder builder)
         {
             var oldCmds = builder.GetCommandList().ToList();
             base.Generate(operation, model, builder);

@@ -51,8 +51,7 @@ namespace EFCore.Sharding.SqlServer
                         break;
                     }
 
-                    bulkCopy.ColumnMappings.Add(propertyInfo.Name,
-                        string.IsNullOrEmpty(destinationColumn) ? propertyInfo.Name : destinationColumn);
+                    bulkCopy.ColumnMappings.Add(propertyInfo.Name, string.IsNullOrEmpty(destinationColumn) ? propertyInfo.Name : destinationColumn);
 
                     table.Columns.Add(propertyInfo.Name, Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType);
                 }
