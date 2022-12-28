@@ -18,17 +18,19 @@ namespace EFCore.Sharding
     [SuppressMessage("Usage", "EF1001:Internal EF Core API usage.", Justification = "<挂起>")]
     internal class ShardingMigration : MigrationsModelDiffer
     {
-        public ShardingMigration(
-            IRelationalTypeMappingSource typeMappingSource,
-            IMigrationsAnnotationProvider migrationsAnnotations,
-            IChangeDetector changeDetector,
-            IUpdateAdapterFactory updateAdapterFactory,
-            CommandBatchPreparerDependencies commandBatchPreparerDependencies
-            )
+#if NET7_0
+        public ShardingMigration(IRelationalTypeMappingSource typeMappingSource, IMigrationsAnnotationProvider migrationsAnnotationProvider, IRowIdentityMapFactory rowIdentityMapFactory, CommandBatchPreparerDependencies commandBatchPreparerDependencies) 
+            : base(typeMappingSource, migrationsAnnotationProvider, rowIdentityMapFactory, commandBatchPreparerDependencies)
+        {
+        }
+#else
+     public ShardingMigration(IRelationalTypeMappingSource typeMappingSource, IMigrationsAnnotationProvider migrationsAnnotations, IChangeDetector changeDetector, IUpdateAdapterFactory updateAdapterFactory, CommandBatchPreparerDependencies commandBatchPreparerDependencies)
         : base(typeMappingSource, migrationsAnnotations, changeDetector, updateAdapterFactory, commandBatchPreparerDependencies)
         {
 
         }
+#endif
+
         public override IReadOnlyList<MigrationOperation> GetDifferences(IRelationalModel source, IRelationalModel target)
         {
             var shardingOption = Cache.RootServiceProvider.GetService<IOptions<EFCoreShardingOptions>>().Value;

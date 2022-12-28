@@ -1,21 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net6.0</TargetFrameworks>
-    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.1;net6.0;net7.0</TargetFrameworks>
+		<GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.1'">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="5.*" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'=='netstandard2.1'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="5.*" />
+	</ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="6.*" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="6.*" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\EFCore.Sharding\EFCore.Sharding.csproj" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'=='net7.0'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="7.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\EFCore.Sharding\EFCore.Sharding.csproj" />
+	</ItemGroup>
 </Project>
